@@ -1,4 +1,3 @@
-
 import { ApiNames } from '../Utils/ApiNames';
 
 const getAuthHeaders = () => {
@@ -185,6 +184,44 @@ export const GetAttendanceByDate = async (courseId, trainingId, attDate) => {
     } catch (error) {
         return { response: { ok: false, statusText: error.message }, responseData: null };
     }
+};
+
+export const GetCombinedScores = async (filters = {}) => {
+    const queryParams = new URLSearchParams();
+    
+    // Add filters to query string
+    Object.keys(filters).forEach(key => {
+        if (filters[key]) {
+            queryParams.append(key, filters[key]);
+        }
+    });
+    
+    const url = filters && Object.keys(filters).length > 0 
+        ? `${ApiNames.Reports}/combined-scores?${queryParams.toString()}`
+        : `${ApiNames.Reports}/combined-scores`;
+    
+    const response = await fetch(url, otherOptions);
+    const responseData = await response.json();
+    return { response, responseData };
+};
+
+export const GetCombinedScoresSummary = async (filters = {}) => {
+    const queryParams = new URLSearchParams();
+    
+    // Add filters to query string
+    Object.keys(filters).forEach(key => {
+        if (filters[key]) {
+            queryParams.append(key, filters[key]);
+        }
+    });
+    
+    const url = filters && Object.keys(filters).length > 0 
+        ? `${ApiNames.Reports}/combined-scores/summary?${queryParams.toString()}`
+        : `${ApiNames.Reports}/combined-scores/summary`;
+    
+    const response = await fetch(url, otherOptions);
+    const responseData = await response.json();
+    return { response, responseData };
 };
 
 
