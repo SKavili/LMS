@@ -1,4 +1,3 @@
-
 require('dotenv').config({ path: '.env' }).parsed;
 
 const express = require('express');
@@ -25,6 +24,7 @@ const testAnswScorRoutes = require('./routes/testAnswersAndScore');
 const reportRoutes = require('./routes/reports');
 const studentTrainingRoutes = require('./routes/studentTrainings');
 const otherRoutes = require('./routes/others');
+const courseContentRoutes = require('./routes/courseContent');
 // Setup Morgan to use Winston
 app.use(morgan('combined', {
     stream: {
@@ -53,3 +53,4 @@ app.use('/test-answers-score', testAnswScorRoutes);
 app.use('/reports', reportRoutes);
 app.use('/student_trainings', studentTrainingRoutes);
 app.use('/others', otherRoutes);
+app.use('/course-content', courseContentRoutes);
