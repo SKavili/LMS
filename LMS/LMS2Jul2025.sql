@@ -464,3 +464,19 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2025-07-02 15:36:28
+
+-- Table structure for table `CourseContent`
+
+CREATE TABLE IF NOT EXISTS `CourseContent` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `date` DATE NOT NULL,
+  `day` VARCHAR(20),
+  `day_number` INT,
+  `skill` VARCHAR(50),
+  `topic` TEXT,
+  `assignment` TEXT,
+  `assessment` TEXT,
+  `project` TEXT,
+  `status` ENUM('pending', 'in_progress', 'completed') DEFAULT 'pending',
+  `notes` TEXT
+);

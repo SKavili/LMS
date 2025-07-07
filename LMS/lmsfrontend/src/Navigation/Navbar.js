@@ -112,6 +112,9 @@ const Navbar = ({ toggleSidebar }) => {
                                     <i className="bi bi-book" /> View Attendance
                                 </Link>
                             </li>
+                            <li>
+                                <a href="/course-content">Course Content</a>
+                            </li>
                         </>
                     )}
                     {role === 2 && (
