@@ -108,17 +108,18 @@ router.post('/', async (req, res) => {
                 break;
                 
             case 'student':
-                // Get all tests and scores for a specific student
+                // Get all tests and scores for a specific student, avoiding duplicates
                 query = `
                     SELECT 
                         tm.test_id as id,
                         tm.test_name as name,
-                        COALESCE(ts.score, 0) as total_score
+                        COALESCE(MAX(ts.score), 0) as total_score
                     FROM test_master tm
                     INNER JOIN training_details td ON tm.training_id = td.id
                     INNER JOIN student_trainings st ON td.id = st.training_id
                     LEFT JOIN test_scores ts ON tm.test_id = ts.test_id AND st.student_id = ts.student_id
                     WHERE st.student_id = ?
+                    GROUP BY tm.test_id, tm.test_name
                     ORDER BY tm.test_name
                 `;
                 params = [id];
